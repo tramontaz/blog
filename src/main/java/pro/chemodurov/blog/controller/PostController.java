@@ -1,12 +1,19 @@
 package pro.chemodurov.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pro.chemodurov.blog.entity.Post;
 import pro.chemodurov.blog.service.PostService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/posts")
@@ -15,15 +22,27 @@ public class PostController {
 
     private final PostService postService;
 
-    @GetMapping()
-    public String sayHello(Model model) {
-        model.addAttribute("posts", postService.showAllPageable(Pageable.unpaged()));
-        return "/view/hello";
-    }
-
     @GetMapping("/all")
-    public String showAllPageable(Model model) {
-        model.addAttribute("posts", postService.showAllPageable(Pageable.unpaged()));
-        return "show-posts";
+    public String sayHello(
+            Model model,
+            @RequestParam(value = "page", required = false) Integer page,
+            @RequestParam(value = "size", required = false) Integer size) {
+
+        int currentPage = (page == null) ? 1 : page;
+        int pageSize = (size == null) ? 5 : size;
+
+        Page<Post> posts = postService.showAllPageable(PageRequest.of(currentPage - 1, pageSize));
+
+        model.addAttribute("posts", posts);
+
+        int totalPages = posts.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        return "/view/hello";
     }
 }
