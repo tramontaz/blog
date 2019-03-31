@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pro.chemodurov.blog.entity.Post;
+import pro.chemodurov.blog.exception.PostNotFoundException;
 import pro.chemodurov.blog.service.PostService;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/all")
-    public String sayHello(
+    public String getAllPostsPageable(
             Model model,
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "size", required = false) Integer size) {
@@ -43,6 +44,13 @@ public class PostController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        return "/view/hello";
+        return "/view/all-posts";
+    }
+
+    @GetMapping("/post")
+    public String getPostById(@RequestParam("id") Long postId, Model model) throws PostNotFoundException {
+        final Post post = postService.getPost(postId);
+        model.addAttribute("post", post);
+        return "/view/post";
     }
 }

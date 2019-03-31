@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Hello</title>
@@ -12,15 +12,15 @@
 
 <div class="container-fluid">
 
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" th:href="@{/posts/all}">
             <img src="/static/img/logo.png" width="270" height="28" alt="My logo">
         </a>
     </nav>
 
     <div class="row">
         <div class="column col-9">
-            <div class="card" th:each="post : ${posts.content}">
+            <div class="card mb-4" th:each="post:${posts.content}">
 <!--                    <img src="/static/img/dogs.jpeg" width="300" height="200">-->
                 <div class="text-center font-weight-bolder" >
                     <div class="card-header" th:text="${post.title}"></div>
@@ -29,12 +29,13 @@
                     <div class="card-body">
                         <p class="card-text" th:text="${post.preview}"></p>
                         <div class="text-center">
-                            <a href="#" class="btn btn-dark stretched-link">Читать далее...</a>
+                            <a th:href="@{/posts/post(id=${post.id})}"
+                               class="btn btn-dark stretched-link">Читать далее...</a>
                         </div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <div class="card-footer text-muted" th:text="${post.dateCreated}"></div>
+                    <div class="card-footer text-muted" th:text="${#dates.format(post.dateCreated, 'dd-MMM-yyyy HH:mm')}"></div>
                 </div>
             </div>
 
@@ -45,8 +46,9 @@
                             th:each="pageNumber : ${pageNumbers}">
                             <span class="page-link">
                                 <a th:href="@{/posts/all(size=${posts.size}, page=${pageNumber})}"
-                               th:text=${pageNumber}
+                               th:text=${pageNumber} style="color: #343a40"
                                th:class="${pageNumber==posts.number + 1} ? active"></a>
+                            </span>
                             <span class="sr-only">(current)</span>
                         </li>
                     </ul>
