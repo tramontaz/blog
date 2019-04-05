@@ -17,7 +17,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public Page<Post> showAllPageable(Pageable pageable) {
-        return postRepository.findAll(pageable);
+        return postRepository.findAllByOrderByDateCreatedDesc(pageable);
     }
 
     @Override
