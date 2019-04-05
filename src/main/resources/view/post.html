@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Posts</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Post</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -9,36 +10,42 @@
 
 </head>
 <body>
-
-<div class="container-fluid">
-
+<!--   Header-->
     <nav class="navbar navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" th:href="@{/posts/all}">
-            <img src="/static/img/logo.png" width="270" height="28" alt="My logo">
-        </a>
+        <a class="navbar-brand" th:href="@{/posts/all}" th:text="CHEMODUROV"></a>
     </nav>
-
-    <div class="row">
-        <div class="column col-9">
-            <div class="container">
-                <div class="text-center font-weight-bold mb-200" th:text="${post.title}"></div>
-                <div class="text-justify" th:text="${post.content}"></div>
+<!--   Content-->
+    <div class="container-fluid mb-5">
+        <div class="row">
+            <div class="column col-1"></div>
+            <div class="column col-8" >
+                <div class="flex " >
+                    <div class="text-center font-weight-bold">
+                        <h2 th:text="${post.title}"></h2>
+                    </div>
+                    <div class="text-justify mb-4" th:remove="tag" th:utext="${post.content}"></div>
+                </div>
             </div>
 
-        </div>
-
-        <div class="column col-3" style="position:fixed;right:0;">
-            <div class="card">
-                <img src="" alt="">
-                <div class="text-center">
-                    <div class="card-header"><h2>Обо мне</h2></div>
+            <div class="column col-3" style="position:fixed;right:0;">
+                <div class="card">
+                    <img src="" alt="">
+                    <div class="text-center">
+                        <div class="card-header"><h2>Обо мне</h2></div>
+                    </div>
+                    <div class="card-body">Меня зовут Вадим</div>
+                    <div class="card-footer text-muted">Номер телефона: +7(928)45-777-89</div>
                 </div>
-                <div class="card-body">Меня зовут Вадим</div>
-                <div class="card-footer text-muted">Номер телефона: +7(928)45-777-89</div>
             </div>
         </div>
     </div>
-</div>
+<!--    footer-->
+    <footer class="footer navbar-dark bg-dark fixed-bottom">
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="https://chemodurov.pro"> chemodurov.pro</a>
+        </div>
+    </footer>
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -1,1 +1,1 @@
-ALTER TABLE post ALTER COLUMN preview TYPE VARCHAR(2000) USING preview::varchar(2000);
+ALTER TABLE post ALTER COLUMN preview TYPE VARCHAR(10000) USING preview::varchar(10000);

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <title>Posts</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -10,14 +10,10 @@
 </head>
 <body>
 
-<div class="container-fluid">
-
-    <nav class="navbar navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" th:href="@{/posts/all}">
-            <img src="/static/img/logo.png" width="270" height="28" alt="My logo">
-        </a>
-    </nav>
-
+<nav class="navbar navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" th:href="@{/posts/all}" th:text="CHEMODUROV"></a>
+</nav>
+    <div class="container-fluid mb-5">
     <div class="row">
         <div class="column col-9">
             <div class="card mb-4" th:each="post:${posts.content}">
@@ -65,8 +61,15 @@
                 <div class="card-footer text-muted">Номер телефона: +7(928)45-777-89</div>
             </div>
         </div>
+            </div>
+
+        <!--    footer-->
+        <footer class="page-footer unique-color-dark fixed-bottom" style="background-color: #343a40 ;">
+            <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="https://chemodurov.pro"> chemodurov.pro</a>
+            </div>
+        </footer>
     </div>
-</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
