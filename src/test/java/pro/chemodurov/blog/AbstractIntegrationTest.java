@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -15,7 +15,7 @@ import java.time.Duration;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(initializers = {AbstractIntegrationTest.Initializer.class})
-@Profile("test")
+@ActiveProfiles("test")
 public class AbstractIntegrationTest {
 
     @ClassRule

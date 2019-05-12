@@ -29,12 +29,12 @@ server:
 ---
 
 spring:
+  profiles: test
   jpa:
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
-  profiles: test
   flyway:
     enabled: false

@@ -64,7 +64,7 @@ public class PostServiceImplTest {
         posts.add(eleventhPost);
         posts.add(twelfthPost);
 
-        when(postRepository.findAll(Pageable.unpaged())).thenReturn(new PageImpl<>(posts));
+        when(postRepository.findAllByOrderByDateCreatedDesc(Pageable.unpaged())).thenReturn(new PageImpl<>(posts));
         when(postRepository.findById(1L)).thenReturn(firstPostOptional);
         postService = new PostServiceImpl(postRepository);
     }

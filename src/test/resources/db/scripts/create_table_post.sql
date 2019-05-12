@@ -6,7 +6,8 @@ create table post
   content      text,
   title        varchar(255) not null,
   date_created timestamp    not null,
-  date_updated timestamp
+  date_updated timestamp,
+  preview varchar(10000)
 );
 
 alter table post
